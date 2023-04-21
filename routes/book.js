@@ -10,7 +10,7 @@ router.use(express.json());
 
 router.get('/', bookCtrl.getAllBooks);
 
-router.post('/', multer, bookCtrl.createBook);
+router.post('/', auth, multer, bookCtrl.createBook);
 
 router.get('/bestrating', bookCtrl.getBestRating);
 

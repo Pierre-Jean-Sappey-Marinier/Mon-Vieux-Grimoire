@@ -31,6 +31,7 @@ exports.addNote = (req, res, next) => {
       bookObjectf.ratings.push({
         userId: req.body.userId,
         grade: req.body.rating,
+        _id: req.body._id,
       });
       let somme = 0;
       for (let i = 0; i < bookObjectf.ratings.length; i++) {
@@ -38,12 +39,11 @@ exports.addNote = (req, res, next) => {
       }
       let moyenne = somme / bookObjectf.ratings.length;
       bookObjectf.averageRating = Math.ceil(moyenne);
+      console.log('🚀 ~ file: book.js:42 ~ .then ~ bookObjectf:', bookObjectf);
 
       bookObjectf
         .save()
-        .then(() =>
-          res.status(200).json({ message: 'Note ajoutée', id: req.params.id })
-        )
+        .then(() => res.status(200).json(bookObjectf))
         // .then(() => location.reload())
         .catch((error) => res.status(401).json({ error }));
     })
