@@ -5,14 +5,17 @@ const fs = require('fs');
 exports.createBook = (req, res, next) => {
   const bookObject = JSON.parse(req.body.book);
 
-  // delete bookObject._id;
-  // delete bookObject._userId;
+  const name = req.file.fieldname.split(' ').join('_');
+
   const book = new Book({
     ...bookObject,
-    // userId: req.body.book.userId,
-    imageUrl: `${req.protocol}://${req.get('host')}/images/${
-      req.file.filename
-    }`,
+    // userId:bookObject.userId,c
+    // title: bookObject.title,
+    // author: bookObject.author,
+    // year: bookObject.year,
+    // genre: bookObject.genre,
+    // ratings: bookObject.ratings,
+    imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.name}`,
   });
 
   book
@@ -39,7 +42,6 @@ exports.addNote = (req, res, next) => {
       }
       let moyenne = somme / bookObjectf.ratings.length;
       bookObjectf.averageRating = Math.ceil(moyenne);
-      console.log('🚀 ~ file: book.js:42 ~ .then ~ bookObjectf:', bookObjectf);
 
       bookObjectf
         .save()
@@ -57,7 +59,7 @@ exports.modifyBook = (req, res, next) => {
     ? {
         ...JSON.parse(req.body.book),
         imageUrl: `${req.protocol}://${req.get('host')}/images/${
-          req.file.filename
+          req.file.name
         }`,
       }
     : { ...req.body };
