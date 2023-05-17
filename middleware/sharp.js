@@ -14,6 +14,7 @@ module.exports = (req, res, next) => {
   const randomName = uuidv4();
   console.log('req.file', req.file);
   const extension = MIME_TYPES[req.file.mimetype];
+  console.log('🚀 ~ file: sharp.js:17 ~ extension:', extension);
   console.log('🚀 ~ file: sharp.js:15 ~ extension:', extension);
 
   // if (!req.file.mimetype.match(/\/(png)$/)) {
