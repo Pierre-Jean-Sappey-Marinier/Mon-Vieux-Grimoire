@@ -20,7 +20,7 @@ exports.signup = (req, res, next) => {
 };
 
 exports.login = (req, res, next) => {
-  const tokenKey = process.env.TOKEN_KEY;
+  const tokenKey = process.env.ENCRYPTE_TOKEN_PASSWORD;
   User.findOne({ email: req.body.email })
     .then((user) => {
       if (user === null) {

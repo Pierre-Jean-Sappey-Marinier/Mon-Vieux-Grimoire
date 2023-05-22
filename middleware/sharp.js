@@ -17,21 +17,13 @@ module.exports = (req, res, next) => {
   console.log('🚀 ~ file: sharp.js:17 ~ extension:', extension);
   console.log('🚀 ~ file: sharp.js:15 ~ extension:', extension);
 
-  // if (!req.file.mimetype.match(/\/(png)$/)) {
   if (!req.file.mimetype.match(/\/(png|jpg|jpeg)$/)) {
-    // sharp(req.file.buffer)
-    // .toFile(`./images/${day}-${month}-${year}${Date.now()}.${extension}`)
-    // .toFile(`./images/${name}`)
-    // .then((data) => {
-    //   req.file.name = `${name}`;
-    // });
     return next();
   }
 
   sharp(req.file.buffer)
     .png({ quality: 60 })
 
-    // .toFile(`./images/${day}-${month}-${year}${Date.now()}.${extension}`)
     .toFile(`./images/${randomName}.${extension}`)
     .then((data) => {
       req.file.name = `${randomName}.${extension}`;
