@@ -3,9 +3,12 @@ const mongoose = require('mongoose');
 const bookRoute = require('./routes/book');
 const path = require('path');
 const userRoutes = require('./routes/user');
+require('dotenv').config();
 
-const uri =
-  'mongodb+srv://poukram:Cd6QEcT79KAnSnN@cluster0.5xaiin4.mongodb.net/?retryWrites=true&w=majority';
+const pswMongoDb = process.env.PASSWORD_MONGODB;
+const mongo_Id = process.env.MONGO_DB_ID;
+
+const uri = `mongodb+srv://${mongo_Id}:${pswMongoDb}@cluster0.5xaiin4.mongodb.net/?retryWrites=true&w=majority`;
 
 mongoose
   .connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
