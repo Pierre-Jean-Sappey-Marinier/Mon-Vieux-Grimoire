@@ -12,10 +12,7 @@ module.exports = (req, res, next) => {
   }
 
   const randomName = uuidv4();
-  console.log('req.file', req.file);
   const extension = MIME_TYPES[req.file.mimetype];
-  console.log('🚀 ~ file: sharp.js:17 ~ extension:', extension);
-  console.log('🚀 ~ file: sharp.js:15 ~ extension:', extension);
 
   if (!req.file.mimetype.match(/\/(png|jpg|jpeg)$/)) {
     return next();
@@ -27,11 +24,9 @@ module.exports = (req, res, next) => {
     .toFile(`./images/${randomName}.${extension}`)
     .then((data) => {
       req.file.name = `${randomName}.${extension}`;
-      console.log('freussite', data, req.file);
       next();
     })
     .catch((err) => {
-      console.log('Error', err);
       next(err);
     });
 };
