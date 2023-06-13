@@ -6,9 +6,10 @@ const userRoutes = require('./routes/user');
 require('dotenv').config();
 
 const pswMongoDb = process.env.PASSWORD_MONGODB;
-const mongo_Id = process.env.MONGO_DB_ID;
+const mongoId = process.env.MONGO_DB_ID;
+const mongoCluster = process.env.MONGO_CLUSTER;
 
-const uri = `mongodb+srv://${mongo_Id}:${pswMongoDb}@cluster0.5xaiin4.mongodb.net/?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://${mongoId}:${pswMongoDb}${mongoCluster}.mongodb.net/?retryWrites=true&w=majority`;
 
 mongoose
   .connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
